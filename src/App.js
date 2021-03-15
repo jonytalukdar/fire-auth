@@ -58,7 +58,12 @@ function App() {
       });
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    if (user.name && user.password) {
+      console.log('ok');
+    }
+    e.preventDefault();
+  };
 
   const handleBlur = (e) => {
     let isFieldValid = true;
@@ -98,6 +103,7 @@ function App() {
           type="text"
           name="name"
           id=""
+          required
           onBlur={handleBlur}
           placeholder="your name"
         />
