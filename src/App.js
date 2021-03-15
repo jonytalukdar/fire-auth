@@ -55,8 +55,15 @@ function App() {
       .catch((err) => {
         console.log(err.message);
       });
-    console.log('sing out');
   };
+
+  const handleSubmit = () => {};
+
+  const handleChange = (e) => {
+    console.log(e.target.value);
+    console.log(e.target.name);
+  };
+
   return (
     <div className="App">
       {user.isSignIn ? (
@@ -72,10 +79,22 @@ function App() {
         </div>
       )}
       <h1>Our own authentacation</h1>
-      <form action="">
-        <input type="text" placeholder="Write Your Email Address" required />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="email"
+          onChange={handleChange}
+          placeholder="Write Your Email Address"
+          required
+        />
         <br />
-        <input type="password" placeholder="Password" required />
+        <input
+          type="password"
+          name="password"
+          onChange={handleChange}
+          placeholder="Password"
+          required
+        />
         <br />
         <input type="submit" value="submit" />
       </form>
