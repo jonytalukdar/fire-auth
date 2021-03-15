@@ -4,7 +4,13 @@ import 'firebase/auth';
 import firebaseConfig from './firebase.config';
 import { useState } from 'react';
 
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
+
+if (!firebase.apps.length) {
+  firebase.initializeApp({});
+} else {
+  firebase.app(); // if already initialized, use that one
+}
 
 function App() {
   const provider = new firebase.auth.GoogleAuthProvider();
@@ -65,6 +71,12 @@ function App() {
           <img src={user.photo} alt="" />
         </div>
       )}
+      <h1>Our own authentacation</h1>
+      <input type="text" />
+      <br />
+      <input type="password" />
+      <br />
+      <button type="submit">Submit</button>
     </div>
   );
 }
