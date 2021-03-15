@@ -92,9 +92,18 @@ function App() {
         </div>
       )}
       <h1>Our own authentacation</h1>
-      <p>{user.email}</p>
-      <p>{user.password}</p>
+      <p>name : {user.name}</p>
+      <p>email : {user.email}</p>
+      <p> password : {user.password}</p>
       <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          id=""
+          onBlur={handleBlur}
+          placeholder="your name"
+        />
+        <br />
         <input
           type="text"
           name="email"
