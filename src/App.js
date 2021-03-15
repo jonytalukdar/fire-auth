@@ -60,16 +60,14 @@ function App() {
   const handleSubmit = () => {};
 
   const handleBlur = (e) => {
-    console.log(e.target.name, e.target.value);
+    let isFormValid = true;
     if (e.target.name === 'email') {
-      const isEmailValid = /\S+@\S+\.\S+/.test(e.target.value);
-      console.log(isEmailValid);
+      isFormValid = /\S+@\S+\.\S+/.test(e.target.value);
     }
     if (e.target.name === 'password') {
       const isPasswordValid = e.target.value.length > 6;
       const passwordHasNumber = /\d{1}/.test(e.target.value);
-      console.log(isPasswordValid);
-      console.log('number', passwordHasNumber);
+      isFormValid = isPasswordValid && passwordHasNumber;
     }
   };
 
