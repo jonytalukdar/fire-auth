@@ -12,24 +12,37 @@ function App() {
     isSignIn: false,
     name: '',
     email: '',
-    photoUrl: '',
+    photo: '',
   });
   const handleSignIN = () => {
     firebase
       .auth()
       .signInWithPopup(provider)
       .then((response) => {
-        setUser(response.user);
+        const { displayName, email, photoURL } = response.user;
+        const signedInUser = {
+          isSignIn: true,
+          name: displayName,
+          email: email,
+          photo: photoURL,
+        };
+        setUser(signedInUser);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log(err.message);
       });
   };
   return (
     <div className="App">
       <button onClick={handleSignIN}>Sign In</button>
-      {user.map((user) => (
+      {user.isSignIn && (
         <div>
-          <h1>{user.displayName}</h1>
+          <h2>{user.name}</h2>
+          <h3>YOur email : {user.email}</h3>
+          <img src={user.photo} alt="" />
         </div>
-      ))}
+      )}
     </div>
   );
 }
