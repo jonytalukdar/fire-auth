@@ -59,7 +59,7 @@ function App() {
 
   const handleSubmit = () => {};
 
-  const handleChange = (e) => {
+  const handleBlur = (e) => {
     console.log(e.target.value);
     console.log(e.target.name);
   };
@@ -83,7 +83,7 @@ function App() {
         <input
           type="text"
           name="email"
-          onChange={handleChange}
+          onBlur={handleBlur}
           placeholder="Write Your Email Address"
           required
         />
@@ -91,7 +91,7 @@ function App() {
         <input
           type="password"
           name="password"
-          onChange={handleChange}
+          onBlue={handleBlur}
           placeholder="Password"
           required
         />
