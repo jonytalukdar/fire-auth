@@ -72,11 +72,13 @@ function App() {
         </div>
       )}
       <h1>Our own authentacation</h1>
-      <input type="text" />
-      <br />
-      <input type="password" />
-      <br />
-      <button type="submit">Submit</button>
+      <form action="">
+        <input type="text" placeholder="Write Your Email Address" required />
+        <br />
+        <input type="password" placeholder="Password" required />
+        <br />
+        <input type="submit" value="submit" />
+      </form>
     </div>
   );
 }
