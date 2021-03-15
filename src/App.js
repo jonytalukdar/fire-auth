@@ -18,6 +18,7 @@ function App() {
     isSignIn: false,
     name: '',
     email: '',
+    password: '',
     photo: '',
   });
   const handleSignIN = () => {
@@ -69,6 +70,11 @@ function App() {
       const passwordHasNumber = /\d{1}/.test(e.target.value);
       isFormValid = isPasswordValid && passwordHasNumber;
     }
+    if (isFormValid) {
+      const newUserInfo = { ...user };
+      newUserInfo[e.target.name] = e.target.value;
+      setUser(newUserInfo);
+    }
   };
 
   return (
@@ -86,6 +92,8 @@ function App() {
         </div>
       )}
       <h1>Our own authentacation</h1>
+      <p>{user.email}</p>
+      <p>{user.password}</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
