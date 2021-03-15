@@ -59,8 +59,10 @@ function App() {
   };
 
   const handleSubmit = (e) => {
-    if (user.name && user.password) {
-      console.log('ok');
+    console.log(user.email, user.password);
+
+    if (user.email && user.password) {
+      console.log('submited');
     }
     e.preventDefault();
   };
@@ -103,7 +105,6 @@ function App() {
           type="text"
           name="name"
           id=""
-          required
           onBlur={handleBlur}
           placeholder="your name"
         />
