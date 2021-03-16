@@ -12,6 +12,7 @@ if (!firebase.apps.length) {
 
 function App() {
   const provider = new firebase.auth.GoogleAuthProvider();
+  const [newUser, setNewUser] = useState(false);
   const [user, setUser] = useState({
     isSignIn: false,
     name: '',
@@ -114,17 +115,23 @@ function App() {
           <img src={user.photo} alt="" />
         </div>
       )}
-      <h1>Our own authentacation</h1>
-      <input type="checkbox" name="newUser" />
+      <h1>Our own authentication</h1>
+      <input
+        type="checkbox"
+        onChange={() => setNewUser(!newUser)}
+        name="newUser"
+      />
       <label htmlFor="newUser">New User Sing Up</label>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          id=""
-          onBlur={handleBlur}
-          placeholder="your name"
-        />
+        {newUser && (
+          <input
+            type="text"
+            name="name"
+            id=""
+            onBlur={handleBlur}
+            placeholder="your name"
+          />
+        )}
         <br />
         <input
           type="text"
