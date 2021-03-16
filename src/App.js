@@ -62,7 +62,7 @@ function App() {
   const handleSubmit = (e) => {
     // console.log(user.email, user.password);
 
-    if (user.email && user.password) {
+    if (newUser && user.email && user.password) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(user.email, user.password)
@@ -78,11 +78,29 @@ function App() {
           newUserInfo.error = error.message;
           newUserInfo.success = false;
           setUser(newUserInfo);
-          // ..
         });
     }
     e.preventDefault();
   };
+
+  if (!newUser && user.email && user.password) {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(user.email, user.password)
+      .then((res) => {
+        // Signed in
+        const newUserInfo = { ...user };
+        newUserInfo.error = '';
+        newUserInfo.success = true;
+        setUser(newUserInfo);
+      })
+      .catch((error) => {
+        const newUserInfo = { ...user };
+        newUserInfo.error = error.message;
+        newUserInfo.success = false;
+        setUser(newUserInfo);
+      });
+  }
 
   const handleBlur = (e) => {
     let isFieldValid = true;
@@ -154,7 +172,9 @@ function App() {
       <p style={{ color: 'red' }}>{user.error}</p>
       <p style={{ color: 'green' }}>{user.success}</p>
       {user.success && (
-        <p style={{ color: 'green' }}>User Created Successfully</p>
+        <p style={{ color: 'green' }}>
+          User {newUser ? 'Created' : 'Logged In'} Successfully
+        </p>
       )}
     </div>
   );
