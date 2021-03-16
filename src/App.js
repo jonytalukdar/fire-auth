@@ -115,7 +115,8 @@ function App() {
         </div>
       )}
       <h1>Our own authentacation</h1>
-
+      <input type="checkbox" name="newUser" />
+      <label htmlFor="newUser">New User Sing Up</label>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
