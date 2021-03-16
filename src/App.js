@@ -7,7 +7,7 @@ import { useState } from 'react';
 // firebase.initializeApp(firebaseConfig);
 
 if (!firebase.apps.length) {
-  firebase.initializeApp({});
+  firebase.initializeApp(firebaseConfig);
 } else {
   firebase.app(); // if already initialized, use that one
 }
@@ -59,10 +59,19 @@ function App() {
   };
 
   const handleSubmit = (e) => {
-    console.log(user.email, user.password);
+    // console.log(user.email, user.password);
 
     if (user.email && user.password) {
-      console.log('submited');
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(user.email, user.password)
+
+        .catch((error) => {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log(errorCode, errorMessage);
+          // ..
+        });
     }
     e.preventDefault();
   };
