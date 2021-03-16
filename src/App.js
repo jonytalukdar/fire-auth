@@ -4,8 +4,6 @@ import 'firebase/auth';
 import firebaseConfig from './firebase.config';
 import { useState } from 'react';
 
-// firebase.initializeApp(firebaseConfig);
-
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 } else {
@@ -20,6 +18,7 @@ function App() {
     email: '',
     password: '',
     photo: '',
+    error: '',
   });
   const handleSignIN = () => {
     firebase
@@ -65,11 +64,16 @@ function App() {
       firebase
         .auth()
         .createUserWithEmailAndPassword(user.email, user.password)
+        .then((response) => {
+          const newUserInfo = { ...user };
+          newUserInfo.error = '';
+          setUser(newUserInfo);
+        })
 
         .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log(errorCode, errorMessage);
+          const newUserInfo = { ...user };
+          newUserInfo.error = error.message;
+          setUser(newUserInfo);
           // ..
         });
     }
@@ -136,6 +140,7 @@ function App() {
         <br />
         <input type="submit" value="submit" />
       </form>
+      <p style={{ color: 'red' }}>{user.error}</p>
     </div>
   );
 }
